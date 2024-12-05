@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="file-list-cotainer">
+    <h2>Candidatos</h2>
+    <ul>
+        {% for candidato in candidatos %}
+        <li class="mb-3 border-bottom py-2">
+            {{ candidato.nome }} - {{ candidato.telefone }} - {{ candidato.email }}
+            <a href="/download/{{ candidato.curriculo }}" class="btn btn-success download" target="_blank">Baixar</a>
+            <a href="/delete/{{ candidato.curriculo }}" class="btn btn-danger excluir">Excluir</a>
+        {% else %}
+            <h1>Nenhum arquivo encontrado</h1>
+        {% endfor %}
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

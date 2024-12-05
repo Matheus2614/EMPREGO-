@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<hr>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Candidatar-se</h1>
+
+            {% if msg_erro %} <!-- Exibe mensagem de erro, se houver -->
+            <div class="alert alert-danger" role="alert">
+                {{ msg_erro }}
+            </div>
+            {% endif %}
+
+            <form action="/candidato/{{ id_vaga }}" method="post" enctype="multipart/form-data" class="needs-validation"
+                novalidate>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Nome do Candidato</label>
+                    <input type="text" class="form-control" id="titulo" name="nome" required>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="formato" class="form-label">Telefone</label>
+                    <input type="text" class="form-control" id="telefone" name="telefone" required> <br><br>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+
+                <div class="upload-container">
+                    <h2>Envie seu currículo</h2>
+
+                    <input type="file" name="file">
+                    {% if msg %}
+                    <div class="mensagem">
+                        <p>{{ msg }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <br><br>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Candidatar-se à Vaga</button>
+                    {% if msg_erro %} <p>{{ msg_erro }}</p> {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+
+<!-- Script do BS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+<!-- Link do Input Mask -->
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
+
+<!-- Script de configuraão do Input Mask -->
+<script>
+    Inputmask("(99)99999-9999").mask(document.getElementById("telefone")) //Mascara para o telefone
+</script>
+
+{% endblock %}

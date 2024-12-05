@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        <li><a href="/adm">Voltar</a></li>
+    </ul>
+
+<hr>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Editar empresa</h1>
+
+            {% if msg_erro %} <!-- Exibe mensagem de erro, se houver -->
+            <div class="alert alert-danger" role="alert">
+                {{ msg_erro }}
+            </div>
+            {% endif %}
+
+            <form action="/cadastrar_vaga" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Nome da empresa</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" required>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">CNPJ</label>
+                    <input type="text" class="form-control" id="cnpj" name="cnpj" required> <br><br>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="formato" class="form-label">Telefone</label>
+                    <input type="text" class="form-control" id="telefone" name="telefone" required> <br><br>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+
+                <br>
+
+                <h2>Iformações para acesso à plataforma</h2>
+
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required> <br><br>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="local" class="form-label">Senha</label>
+                    <input type="text" class="form-control" id="senha" name="senha" required> <br><br>
+                    <div class="valid-feedback">
+                        Parece Bom!
+                    </div>
+                    <div class="invalid-feedback">
+                        Algo está errado!
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Cadastrar Vaga</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
+
+<!-- Script do BS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+crossorigin="anonymous"></script>
+
+<!-- Link do Input Mask -->
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.8/dist/inputmask.min.js"></script>
+
+<!-- Script de configuraão do Input Mask -->
+ <script>
+    Inputmask("99.999.999/9999-99").mask(document.getElementById("cnpj")) //Mascara para o cnpj
+    Inputmask("(99)99999-9999").mask(document.getElementById("telefone")) //Mascara para o telefone
+ </script>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>TODAS AS VAGAS DISPONÍVEIS</h1>
+<p>Ache a melhor opção para você!</p>
+
+<div class=" col-12 text-center">
+
+    <div>
+        
+    </div>
+
+    <div class="row mt-4">
+
+        {% for vaga in vagas %}
+            <div class="col-12 col-md-6 col-lg-4">
+            {% include 'card.html' %}
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
